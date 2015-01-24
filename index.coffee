@@ -8,6 +8,7 @@ app = module.exports = express()
 
 # Mount apps
 app.use require './apps/partners'
+app.use require './apps/artworks'
 
 # Proxy the rest to Gravity
 proxy = httpProxy.createProxyServer()
