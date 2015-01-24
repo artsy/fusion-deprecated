@@ -11,23 +11,25 @@ artsyXapp = require 'artsy_xapp'
 app = module.exports = express()
 
 app.get '/api/orchestration/artworks/:id', (req, res, next) ->
-  fetchArtwork req.params.id, (err, data) ->
+  fetchAndCacheArtwork req.params.id, (err, data) ->
     return next err if err
     res.send data
 
 fetchAndCacheArtwork = (id, callback) ->
-  db.artworks.findOne { _id: ObjectId(id) }, (err, artwork) ->
+  db.artworks.findOne { id: id }, (err, artwork) ->
     return callback err if err
-    if doc
+    console.log 'moo', artwork
+    if artwork
       callback null, artwork
       callback = ->
     fetchArtwork id, (err, artwork) ->
       return callback err if err
-      db.artworks.save _.extend(artwork, _id: ObjectId artwork._id), (err, artwork) ->
-      callback null, artwork
-
+      _.extend artwork, _id: ObjectId artwork._id
+      db.artworks.save artwork, (err, artwork) ->
+        callback err, artwork
 
 fetchArtwork = (id, callback) ->
+  console.log 'MOOOO'
   artsyXapp (err, xappToken) ->
     return callback err if err
     request
@@ -51,7 +53,7 @@ fetchArtwork = (id, callback) ->
         ], (err, [partner, artists]) ->
           return callback err if err
           data =
-            _id: artwork.id
+            id: artwork.id
             image_urls: imageUrls artwork
             artwork: artwork
             artists: artists._embedded.artists
