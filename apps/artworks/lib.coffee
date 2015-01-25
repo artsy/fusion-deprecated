@@ -1,5 +1,11 @@
 db = require 'db'
+async = require 'async'
+request = require 'superagent'
+_ = require 'underscore'
 artsyXapp = require 'artsy_xapp'
+{ ObjectId } = require 'mongojs'
+{ imageUrls } = require 'apiv2_helpers'
+{ ARTSY_URL } = process.env
 
 @fetchAndCacheArtwork = (id, callback) ->
   db.artworks.findOne { $or: [{ id: id }, { slug: id }] }, (err, artwork) ->
@@ -7,13 +13,16 @@ artsyXapp = require 'artsy_xapp'
     if artwork
       callback null, artwork
       callback = ->
-    fetchArtwork id, (err, artwork) ->
+      fetch = throttledFetchArtwork
+    else
+      fetch = fetchArtwork
+    fetch id, (err, artwork) ->
       return callback err if err
       _.extend artwork, _id: ObjectId artwork._id
       db.artworks.save artwork, (err, artwork) ->
         callback err, artwork
 
-@fetchArtwork = fetchArtwork = (id, callback) ->
+fetchArtwork = (id, callback) ->
   artsyXapp (err, xappToken) ->
     return callback err if err
     request
@@ -44,3 +53,5 @@ artsyXapp = require 'artsy_xapp'
             artists: artists._embedded.artists
             partner: partner
           callback null, data
+
+throttledFetchArtwork = _.throttle fetchArtwork, 60000

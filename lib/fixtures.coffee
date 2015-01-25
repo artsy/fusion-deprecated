@@ -1,0 +1,20 @@
+@featuredGalleries =
+  "key": "featured_galleries"
+  "slugs": [
+    "paul-kasmin-gallery"
+    "amanasalto"
+    "ameringer-mcenery-yohe"
+    "gagosian-gallery"
+    "pace-gallery"
+    "spruth-magers"
+    "mitchell-innes-and-nash"
+    "sundaram-tagore-gallery"
+    "waterhouse-and-dodd"
+    "galerie-bsl"
+    "galerie-perrotin"
+    "la-louver"
+    "pearl-lam-galleries"
+    "cheim-and-read"
+    "galerie-patrick-seguin"
+    "cardi-black-box"
+  ]

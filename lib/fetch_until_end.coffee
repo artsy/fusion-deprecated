@@ -25,9 +25,9 @@ module.exports = (resource, callback) ->
         .query(size: 100)
         .end (err, res) ->
           return callback err if err
+          return callback() if res.body._embedded.partners.length is 0
           collection.insert res.body._embedded.partners, (err) ->
             return callback err if err
-            return callback() if res.body._embedded.partners.length is 0
             recursivelyFetch res.body._links.next.href
 
     collection.remove {}, (err) ->
