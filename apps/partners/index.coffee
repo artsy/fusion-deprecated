@@ -20,7 +20,7 @@ storeView = (callback) ->
   artsyXapp (err, xappToken) ->
     return callback err if err
     async.parallel [
-      # (cb) -> fetchUntilEnd 'partners', cb
+      (cb) -> fetchUntilEnd 'partners', cb
       (cb) -> db.curations.findOne { key: 'featured_galleries' }, cb
     ], (err, [featuredGalleries]) ->
       return callback err if err

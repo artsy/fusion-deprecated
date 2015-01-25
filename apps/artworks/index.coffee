@@ -5,7 +5,7 @@ request = require 'superagent'
 _ = require 'underscore'
 artsyXapp = require 'artsy_xapp'
 { ObjectId } = require 'mongojs'
-{ imageUrls } = require 'api_v2_helpers'
+{ imageUrls } = require 'apiv2_helpers'
 { ARTSY_URL } = process.env
 
 app = module.exports = express()

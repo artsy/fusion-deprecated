@@ -4,8 +4,9 @@
   "description": "Experimental orchestration layer for Artsy web clients",
   "main": "index.coffee",
   "scripts": {
-    "test": "mocha",
-    "start": "coffee index.coffee"
+    "test": "foreman run mocha test/**/* --env .env.test",
+    "foo": "echo $1",
+    "start": "foreman run coffee index.coffee"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,11 @@
     "superagent": "*",
     "async": "*",
     "underscore": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "antigravity": "git://github.com/artsy/antigravity.git",
+    "rewire": "*"
   }
 }
