@@ -16,9 +16,8 @@ app.get '/api/orchestration/artworks/:id', (req, res, next) ->
     res.send data
 
 fetchAndCacheArtwork = (id, callback) ->
-  db.artworks.findOne { id: id }, (err, artwork) ->
+  db.artworks.findOne { $or: [{ id: id }, { slug: id }] }, (err, artwork) ->
     return callback err if err
-    console.log 'moo', artwork
     if artwork
       callback null, artwork
       callback = ->
@@ -29,7 +28,6 @@ fetchAndCacheArtwork = (id, callback) ->
         callback err, artwork
 
 fetchArtwork = (id, callback) ->
-  console.log 'MOOOO'
   artsyXapp (err, xappToken) ->
     return callback err if err
     request
@@ -53,9 +51,12 @@ fetchArtwork = (id, callback) ->
         ], (err, [partner, artists]) ->
           return callback err if err
           data =
-            id: artwork.id
+            _id: artwork.id
+            slug: _.last artwork._links.permalink.href.split('/')
             image_urls: imageUrls artwork
             artwork: artwork
             artists: artists._embedded.artists
             partner: partner
           callback null, data
+
+fetchArtwork = _.throttle fetchArtwork, 10000
