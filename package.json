@@ -23,7 +23,6 @@
     "coffee-script": "*",
     "express": "*",
     "mongojs": "*",
-    "http-proxy": "*",
     "debug": "*",
     "superagent": "*",
     "async": "*",
