@@ -16,6 +16,7 @@ _ = require 'underscore'
       (cb) -> db.curations.findOne { key: 'featured_galleries' }, cb
     ], (err, [n, featuredGalleries]) ->
       return callback err if err
+      console.log n, featuredGalleries
       async.map featuredGalleries.slugs, (slug, cb) ->
         request
           .get("#{ARTSY_URL}/api/profiles/#{slug}")

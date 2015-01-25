@@ -1,5 +1,5 @@
 {
-  "name": "artsy-conductor",
+  "name": "fusion",
   "version": "1.0.0",
   "description": "Experimental orchestration layer for Artsy web clients",
   "main": "index.coffee",
@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artsy/artsy-conductor.git"
+    "url": "https://github.com/artsy/fusion.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/artsy/artsy-conductor/issues"
+    "url": "https://github.com/artsy/fusion/issues"
   },
-  "homepage": "https://github.com/artsy/artsy-conductor",
+  "homepage": "https://github.com/artsy/fusion",
   "dependencies": {
     "coffee-script": "*",
     "express": "*",
