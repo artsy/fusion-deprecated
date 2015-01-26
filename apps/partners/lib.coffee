@@ -4,7 +4,6 @@ fetchUntilEnd = require 'fetch_until_end'
 artsyXapp = require 'artsy_xapp'
 aToZ = require 'a_to_z'
 request = require 'superagent'
-debug = require('debug') 'app'
 _ = require 'underscore'
 { ARTSY_URL } = process.env
 
@@ -16,7 +15,6 @@ _ = require 'underscore'
       (cb) -> db.curations.findOne { key: 'featured_galleries' }, cb
     ], (err, [n, featuredGalleries]) ->
       return callback err if err
-      console.log n, featuredGalleries
       async.map featuredGalleries.slugs, (slug, cb) ->
         request
           .get("#{ARTSY_URL}/api/profiles/#{slug}")
@@ -28,12 +26,13 @@ _ = require 'underscore'
           json = {
             key: 'galleries_index'
             a_to_z: aToZ galleries
-            featured_gallery_profiles: for profile in profiles
+            featured_profiles: for profile in profiles
               gallery = _.select(galleries, (gallery) ->
                 slug = _.last gallery._links.profile.href.split('/')
                 slug is profile.handle
               )[0]
               {
+                slug: profile.handle
                 image_url: profile._links.thumbnail.href
                 href: profile._links.permalink.href
                 name: gallery?.name

@@ -3,6 +3,6 @@ express = require 'express'
 
 app = module.exports = express()
 
-app.get '/api/orchestration/artworks/:id', (req, res, next) ->
+app.get '/api/v1/artworks/:id', (req, res, next) ->
   fetchAndCacheArtwork req.params.id, (err, artwork) ->
     if err then next err else res.send artwork
