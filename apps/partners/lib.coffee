@@ -12,9 +12,11 @@ _ = require 'underscore'
     return callback err if err
     async.parallel [
       (cb) -> fetchUntilEnd 'partners', cb
-      (cb) -> db.curations.findOne { key: 'featured_galleries' }, cb
-    ], (err, [n, featuredGalleries]) ->
+      (cb) -> db.curations.findOne { slug: 'featured-galleries' }, cb
+    ], (err, [partners, featuredGalleries]) ->
       return callback err if err
+      galleries = _.where partners, type: 'Gallery'
+      console.log partners, galleries
       async.map featuredGalleries.slugs, (slug, cb) ->
         request
           .get("#{ARTSY_URL}/api/profiles/#{slug}")
@@ -22,22 +24,22 @@ _ = require 'underscore'
           .end (err, res) -> cb err, res.body
       , (err, profiles) ->
         return callback err if err
-        db.apiv2_partners.find { type: 'Gallery' }, (err, galleries) ->
-          json = {
-            key: 'galleries_index'
-            a_to_z: aToZ galleries
-            featured_profiles: for profile in profiles
-              gallery = _.select(galleries, (gallery) ->
-                slug = _.last gallery._links.profile.href.split('/')
-                slug is profile.handle
-              )[0]
-              {
-                slug: profile.handle
-                image_url: profile._links.thumbnail.href
-                href: profile._links.permalink.href
-                name: gallery?.name
-              }
-          }
-          db.views.update(
-            { key: 'galleries_index' }, json, { upsert: true }, callback
-          )
+        json =
+          slug: 'galleries-index'
+          a_to_z: aToZ galleries
+          featured_profiles: for profile in profiles
+            gallery = _.select(galleries, (gallery) ->
+              slug = _.last gallery._links.profile.href.split('/')
+              slug is profile.handle
+            )[0]
+            {
+              slug: profile.handle
+              image_url: profile._links.thumbnail.href
+              href: profile._links.permalink.href
+              name: gallery?.name
+            }
+        db.views.update(
+          { slug: 'galleries-index' }, json, { upsert: true }, callback
+        )
+
+@storeView console.log if module is require.main

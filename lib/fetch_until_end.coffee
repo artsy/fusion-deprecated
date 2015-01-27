@@ -3,13 +3,11 @@
 # pages until no more results are returned. It will then store the results in a
 # collection based on the resource name.
 #
-# fetchUntilEnd 'partners', (err) ->
-#   db.apiv2_partners.count (err, total) ->
+# fetchUntilEnd 'partners', (err, partners) ->
 #
 
 request = require 'superagent'
 debug = require('debug') 'gravity'
-db = require 'db'
 artsyXapp = require 'artsy_xapp'
 { ARTSY_URL } = process.env
 
@@ -17,7 +15,7 @@ module.exports = (resource, callback) ->
   artsyXapp (err, xappToken) ->
     return callback err if err
 
-    collection = db['apiv2_' + resource]
+    data = []
 
     recursivelyFetch = (url) ->
       request
@@ -25,11 +23,9 @@ module.exports = (resource, callback) ->
         .query(size: 100)
         .end (err, res) ->
           return callback err if err
-          return callback() if res.body._embedded.partners.length is 0
-          collection.insert res.body._embedded.partners, (err) ->
-            return callback err if err
-            recursivelyFetch res.body._links.next.href
+          items = res.body._embedded[resource]
+          return callback data if items.length is 0
+          data = data.concat items
+          recursivelyFetch res.body._links.next.href
 
-    collection.remove {}, (err) ->
-      return callback err if err
-      recursivelyFetch "#{ARTSY_URL}/api/#{resource}"
+    recursivelyFetch "#{ARTSY_URL}/api/#{resource}"

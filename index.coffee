@@ -6,7 +6,7 @@ debug = require('debug') 'app'
 app = module.exports = express()
 
 # Mount apps
-app.use require './apps/partners'
+app.use require './apps/views'
 app.use require './apps/artworks'
 
 app.listen PORT, -> debug "Listening on #{PORT}"

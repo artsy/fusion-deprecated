@@ -7,7 +7,6 @@
     "test-root": "foreman run mocha test/**/* -e .env.test",
     "test-apps": "foreman run mocha apps/*/test/**/* -e .env.test",
     "test": "npm run test-root && npm run test-apps",
-    "foo": "echo $1",
     "start": "foreman run coffee index.coffee"
   },
   "repository": {
