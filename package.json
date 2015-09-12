@@ -1,36 +1,24 @@
 {
   "name": "fusion",
   "version": "1.0.0",
-  "description": "Experimental orchestration layer for Artsy web clients",
-  "main": "index.coffee",
+  "description": "Orchestration layer for Artsy web clients",
+  "main": "index.js",
   "scripts": {
-    "test-root": "foreman run mocha test/**/* -e .env.test",
-    "test-apps": "foreman run mocha apps/*/test/**/* -e .env.test",
-    "test": "npm run test-root && npm run test-apps",
-    "start": "foreman run coffee index.coffee"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artsy/fusion.git"
+    "url": "git+https://github.com/artsy/fusion.git"
   },
+  "keywords": [
+    "fusion",
+    "orchestration",
+    "layer"
+  ],
+  "author": "Craig Spaeth",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/artsy/fusion/issues"
   },
-  "homepage": "https://github.com/artsy/fusion",
-  "dependencies": {
-    "coffee-script": "*",
-    "express": "*",
-    "mongojs": "*",
-    "debug": "*",
-    "superagent": "*",
-    "async": "*",
-    "underscore": "*"
-  },
-  "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "antigravity": "git://github.com/artsy/antigravity.git",
-    "rewire": "*"
-  }
+  "homepage": "https://github.com/artsy/fusion#readme"
 }
