@@ -11,7 +11,7 @@ Meta
 * __Staging:__ [https://fusion-staging.artsy.net/](https://staging.artsy.net/) | [Heroku](https://dashboard.heroku.com/apps/fusion-staging/resources)
 * __Github:__ [https://github.com/artsy/fusion/](https://github.com/artsy/fusion/)
 * __CI:__ [Semaphore](https://semaphoreapp.com/artsy/fusion/); merged PRs to artsy/fusion#master are automatically deployed to staging; production is manually deployed from semaphore
-* __Point People:__ [@craigspaeth](https://github.com/craigspaeth), [@kanaabe](https://github.com/kanaabe)
+* __Point People:__ [@craigspaeth](https://github.com/craigspaeth)
 
 [![Build Status](https://semaphoreapp.com/api/v1/projects/f6c57bfa-d60c-476d-b7cf-5f3954b69495/253300/badge.png)](https://semaphoreapp.com/artsy/fusion)
 
