@@ -1,3 +1,4 @@
+import 'newrelic'
 import express from 'express'
 import artworks from 'artworks'
 import d from 'debug'
