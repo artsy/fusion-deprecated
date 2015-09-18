@@ -6,7 +6,10 @@
   "scripts": {
     "test": "mocha",
     "scrape": "nf run babel-node lib/artworks/scrape.js",
-    "start": "nf run babel-node index.js"
+    "dbcopy": "nf run babel-node lib/db/copy.js",
+    "start": "nf run babel-node index.js",
+    "deploys": "git push git@heroku.com:fusion-staging.git master -f",
+    "deployp": "git push git@heroku.com:fusion-production.git master -f"
   },
   "repository": {
     "type": "git",
@@ -27,12 +30,17 @@
     "artsy-xapp": "^1.0.4",
     "async": "^1.4.2",
     "babel": "^5.8.23",
+    "bucket-assets": "^0.2.9",
     "debug": "^2.2.0",
     "express": "^4.13.3",
     "foreman": "^1.4.1",
     "joi": "^6.7.0",
     "moment": "^2.10.6",
+    "mongo-utils": "^0.5.0",
     "mongojs": "^1.3.0",
-    "superagent": "^1.3.0"
+    "morgan": "^1.6.1",
+    "newrelic": "^1.22.0",
+    "superagent": "^1.3.0",
+    "underscore": "^1.8.3"
   }
 }

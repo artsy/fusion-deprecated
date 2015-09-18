@@ -48,3 +48,16 @@ mongod
 npm start
 ```
 - Fusion should now be running at [http://localhost:3005/](http://localhost:3005/)
+
+Copy production data
+---
+
+- Set the COPY_MONGO_URL env variable to the MONGOHQ_URL config var from heroku
+```
+heroku config --app=fusion-production | grep MONGOHQ_URL
+```
+- Only use the replica set by removing the first hostname from the url, e.g. `...candidate.A.mongolayer.com,candidate.B.mongolayer.com...` should become `...candidate.B.mongolayer.com...`
+- Run the copy task
+```
+npm run dbcopy
+```
