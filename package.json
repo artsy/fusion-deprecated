@@ -7,7 +7,8 @@
     "test": "mocha",
     "scrape": "nf run babel-node lib/artworks/scrape.js",
     "dbcopy": "nf run babel-node lib/db/copy.js",
-    "start": "nf run babel-node index.js",
+    "s": "nf run babel-node index.js",
+    "start": "forever -c babel-node index.js",
     "deploys": "git push git@heroku.com:fusion-staging.git master -f",
     "deployp": "git push git@heroku.com:fusion-production.git master -f"
   },
@@ -35,6 +36,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.3",
     "foreman": "^1.4.1",
+    "forever": "^0.15.1",
     "http-proxy": "^1.11.2",
     "joi": "^6.7.0",
     "moment": "^2.10.6",
