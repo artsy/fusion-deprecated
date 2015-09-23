@@ -45,7 +45,7 @@ mongod
 ```
 - Start the server
 ```
-npm start
+npm run s
 ```
 - Fusion should now be running at [http://localhost:3005/](http://localhost:3005/)
 
