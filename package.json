@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Orchestration layer for Artsy web clients",
   "main": "index.js",
+  "engines": {
+    "node": "4.x.x"
+  },
   "scripts": {
     "test": "mocha",
     "scrape": "nf run babel-node lib/artworks/scrape.js",
@@ -28,6 +31,7 @@
   },
   "homepage": "https://github.com/artsy/fusion#readme",
   "dependencies": {
+    "artsy-newrelic": "^1.0.0",
     "artsy-xapp": "^1.0.4",
     "async": "^1.4.2",
     "babel": "^5.8.23",
