@@ -1,4 +1,4 @@
-import 'newrelic'
+import newrelic from 'artsy-newrelic'
 import express from 'express'
 import artworks from 'artworks/index'
 import d from 'debug'
@@ -19,6 +19,7 @@ if (NODE_ENV == 'production') {
   app.use(forceSSL)
   app.use(hsts({ maxAge: 7776000000 })) // 90 days in ms
 }
+app.use(newrelic)
 app.use(cors())
 app.use(artworks)
 app.use(errorHandler)
