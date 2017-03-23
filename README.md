@@ -6,7 +6,7 @@ Fusion
 Meta
 ---
 
-* __State:__ production
+* __State:__ deprecated (in favor of [cinder](https://github.com/artsy/cinder/blob/master/doc/sitemaps.md))
 * __Production:__ [https://fusion.artsy.net/](https://www.artsy.net/) | [Heroku](https://dashboard.heroku.com/apps/fusion-production/resources)
 * __Staging:__ [https://fusion-staging.artsy.net/](https://staging.artsy.net/) | [Heroku](https://dashboard.heroku.com/apps/fusion-staging/resources)
 * __Github:__ [https://github.com/artsy/fusion/](https://github.com/artsy/fusion/)
